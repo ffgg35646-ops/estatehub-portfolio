@@ -17,7 +17,7 @@ declare global {
   var mongoose: MongooseCache | undefined;
 }
 
-let cached = global.mongoose;
+let cached: MongooseCache | undefined = global.mongoose;
 
 if (!cached) {
   cached = global.mongoose = {
