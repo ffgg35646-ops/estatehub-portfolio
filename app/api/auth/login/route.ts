@@ -50,22 +50,31 @@ export async function POST(req: Request) {
         expiresIn: "7d",
       }
     );
+const response = NextResponse.json(
+  {
+    message: "Login successful",
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
+  },
+  {
+    status: 200,
+  }
+);
 
-    return NextResponse.json(
-      {
-        message: "Login successful",
-        token,
-        user: {
-          id: user._id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-        },
-      },
-      {
-        status: 200,
-      }
-    );
+response.cookies.set("estate_token", token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "lax",
+  path: "/",
+  maxAge: 60 * 60 * 24 * 7,
+});
+
+return response;
+    
   } catch (error) {
     console.error(error);
 
