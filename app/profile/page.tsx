@@ -190,27 +190,120 @@ export default function ProfilePage() {
                 </button>
 
               </div>
+{card ? (
+  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 p-6 text-white shadow-xl">
 
-              {card ? (
-                <div className="rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 p-5 text-white">
+    <div className="flex items-center justify-between">
+      <CreditCard size={38} />
 
-                  <CreditCard size={34} />
+      <span className="rounded-full bg-white/20 px-3 py-1 text-xs">
+        VISA
+      </span>
+    </div>
 
-                  <p className="mt-6 text-lg font-semibold">
-                    **** **** **** {card.number.slice(-4)}
-                  </p>
 
-                  <p className="mt-2 text-sm opacity-90">
-                    {card.holder}
-                  </p>
+    <p className="mt-8 text-xl font-semibold tracking-[4px]">
+      **** **** **** {card.number.slice(-4)}
+    </p>
 
-                </div>
-              ) : (
-                <div className="rounded-xl border-2 border-dashed p-8 text-center text-gray-500">
-                  No payment method added.
-                </div>
-              )}
 
+    <div className="mt-6 flex items-end justify-between">
+
+      <div>
+        <p className="text-xs uppercase opacity-70">
+          Card Holder
+        </p>
+
+        <p className="mt-1 font-semibold">
+          {card.holder}
+        </p>
+      </div>
+
+
+      <div>
+        <p className="text-xs uppercase opacity-70">
+          Expires
+        </p>
+
+        <p className="mt-1 font-semibold">
+          12/28
+        </p>
+      </div>
+
+
+    </div>
+
+  </div>
+
+) : (
+
+  <div className="rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 p-8">
+
+    <div className="text-center">
+
+      <CreditCard
+        size={45}
+        className="mx-auto text-gray-400"
+      />
+
+
+      <h3 className="mt-4 text-lg font-bold text-gray-800">
+        Add Payment Method
+      </h3>
+
+
+      <p className="mt-2 text-sm text-gray-500">
+        Add your Visa or Mastercard details securely.
+      </p>
+
+
+      <div className="mt-6 space-y-3 text-left">
+
+
+        <input
+          placeholder="Card Number"
+          className="w-full rounded-xl border px-4 py-3 outline-none focus:border-blue-600"
+        />
+
+
+        <input
+          placeholder="Card Holder Name"
+          className="w-full rounded-xl border px-4 py-3 outline-none focus:border-blue-600"
+        />
+
+
+        <div className="grid grid-cols-2 gap-3">
+
+          <input
+            placeholder="MM/YY"
+            className="rounded-xl border px-4 py-3 outline-none focus:border-blue-600"
+          />
+
+
+          <input
+            placeholder="CVV"
+            className="rounded-xl border px-4 py-3 outline-none focus:border-blue-600"
+          />
+
+        </div>
+
+
+        <button
+          className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white hover:bg-blue-700"
+        >
+          Add Card
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+)}
             </div>
 
           </div>
