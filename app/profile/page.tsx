@@ -1,214 +1,287 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import {
   User,
   Mail,
   Phone,
-  Edit,
-  Home,
-  Heart,
+  MapPin,
+  CreditCard,
+  Pencil,
+  X,
 } from "lucide-react";
 
 interface UserData {
   name: string;
   email: string;
   phone?: string;
+  address?: string;
   role: string;
 }
 
-export default function ProfilePage() {
+interface CardData {
+  holder: string;
+  number: string;
+}
 
+export default function ProfilePage() {
   const [user, setUser] = useState<UserData | null>(null);
 
+  const [showEdit, setShowEdit] = useState(false);
+
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    address: "",
+  });
+
+  const [card, setCard] = useState<CardData | null>(null);
 
   useEffect(() => {
-
     const savedUser = localStorage.getItem("user");
 
     if (savedUser) {
-      setUser(JSON.parse(savedUser));
+      const data = JSON.parse(savedUser);
+
+      setUser(data);
+
+      setForm({
+        name: data.name || "",
+        phone: data.phone || "",
+        address: data.address || "",
+      });
     }
 
+    const savedCard = localStorage.getItem("paymentCard");
+
+    if (savedCard) {
+      setCard(JSON.parse(savedCard));
+    }
   }, []);
 
+  function handleSave() {
+    if (!user) return;
 
+    const updatedUser = {
+      ...user,
+      name: form.name,
+      phone: form.phone,
+      address: form.address,
+    };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
+    window.dispatchEvent(new Event("userChanged"));
+
+    setUser(updatedUser);
+
+    setShowEdit(false);
+  }
+
+  function handleAddCard() {
+    const holder = prompt("Card Holder");
+
+    if (!holder) return;
+
+    const number = prompt("Card Number");
+
+    if (!number) return;
+
+    const newCard = {
+      holder,
+      number,
+    };
+
+    localStorage.setItem(
+      "paymentCard",
+      JSON.stringify(newCard)
+    );
+
+    setCard(newCard);
+  }
 
   if (!user) {
-
     return (
-      <div className="flex min-h-screen items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center text-xl font-semibold">
         Loading...
       </div>
     );
-
   }
 
-
-
   return (
-
-    <main className="bg-gray-50 py-20">
-
+    <main className="min-h-screen bg-gray-100 py-12">
       <div className="mx-auto max-w-5xl px-6">
 
-
-        <div className="rounded-3xl bg-white p-8 shadow-sm">
-
+        <div className="rounded-3xl bg-white p-8 shadow-lg">
 
           <div className="flex flex-col items-center gap-6 md:flex-row">
 
-
-            <div className="flex h-32 w-32 items-center justify-center rounded-full bg-green-100 text-green-700">
-
-              <User size={60}/>
-
+            <div className="flex h-28 w-28 items-center justify-center rounded-full bg-green-600 text-4xl font-bold text-white">
+              {user.name.charAt(0).toUpperCase()}
             </div>
 
-
-
-            <div className="flex-1 text-center md:text-left">
-
+            <div className="flex-1">
 
               <h1 className="text-3xl font-bold">
                 {user.name}
               </h1>
 
-
               <p className="mt-2 text-gray-500">
+                {user.email}
+              </p>
+
+              <span className="mt-3 inline-block rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
                 {user.role}
-              </p>
-
-
-
-              <Link
-                href="/profile/edit"
-                className="mt-5 inline-flex items-center gap-2 rounded-xl bg-green-600 px-5 py-3 text-white"
-              >
-
-                <Edit size={18}/>
-
-                Edit Profile
-
-              </Link>
-
+              </span>
 
             </div>
 
+            <button
+              onClick={() => setShowEdit(true)}
+              className="flex items-center gap-2 rounded-xl bg-green-600 px-5 py-3 text-white hover:bg-green-700"
+            >
+              <Pencil size={18} />
+              Edit Profile
+            </button>
 
           </div>
 
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
 
+            <div className="rounded-2xl border bg-gray-50 p-6">
 
+              <h2 className="mb-5 text-xl font-bold">
+                Account Information
+              </h2>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
+              <div className="space-y-5">
 
+                <div className="flex items-center gap-3">
+                  <Mail className="text-green-600" />
+                  <span>{user.email}</span>
+                </div>
 
-            <div className="flex items-center gap-4 rounded-xl border p-5">
+                <div className="flex items-center gap-3">
+                  <Phone className="text-green-600" />
+                  <span>{user.phone || "No phone added"}</span>
+                </div>
 
-              <Mail className="text-green-600"/>
+                <div className="flex items-center gap-3">
+                  <MapPin className="text-green-600" />
+                  <span>{user.address || "No address added"}</span>
+                </div>
 
-              <div>
-                <p className="text-sm text-gray-500">
-                  Email
-                </p>
-
-                <p className="font-semibold">
-                  {user.email}
-                </p>
               </div>
 
             </div>
+                        <div className="rounded-2xl border bg-gray-50 p-6">
 
+              <div className="mb-5 flex items-center justify-between">
 
+                <h2 className="text-xl font-bold">
+                  Payment Method
+                </h2>
 
+                <button
+                  onClick={handleAddCard}
+                  className="rounded-lg bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700"
+                >
+                  {card ? "Change Card" : "Add Card"}
+                </button>
 
-            <div className="flex items-center gap-4 rounded-xl border p-5">
-
-              <Phone className="text-green-600"/>
-
-              <div>
-                <p className="text-sm text-gray-500">
-                  Phone
-                </p>
-
-                <p className="font-semibold">
-                  {user.phone || "Not added"}
-                </p>
               </div>
 
-            </div>
+              {card ? (
+                <div className="rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 p-5 text-white">
 
+                  <CreditCard size={34} />
+
+                  <p className="mt-6 text-lg font-semibold">
+                    **** **** **** {card.number.slice(-4)}
+                  </p>
+
+                  <p className="mt-2 text-sm opacity-90">
+                    {card.holder}
+                  </p>
+
+                </div>
+              ) : (
+                <div className="rounded-xl border-2 border-dashed p-8 text-center text-gray-500">
+                  No payment method added.
+                </div>
+              )}
+
+            </div>
 
           </div>
-
-
-
-
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-
-
-            <div className="rounded-2xl bg-green-50 p-6 text-center">
-
-              <Home className="mx-auto text-green-700"/>
-
-              <h3 className="mt-3 text-3xl font-bold">
-                0
-              </h3>
-
-              <p>
-                Properties
-              </p>
-
-            </div>
-
-
-
-
-            <div className="rounded-2xl bg-green-50 p-6 text-center">
-
-              <Heart className="mx-auto text-green-700"/>
-
-              <h3 className="mt-3 text-3xl font-bold">
-                0
-              </h3>
-
-              <p>
-                Favorites
-              </p>
-
-            </div>
-
-
-
-
-            <div className="rounded-2xl bg-green-50 p-6 text-center">
-
-              <User className="mx-auto text-green-700"/>
-
-              <h3 className="mt-3 text-3xl font-bold">
-                Active
-              </h3>
-
-              <p>
-                Account
-              </p>
-
-            </div>
-
-
-          </div>
-
 
         </div>
 
-
       </div>
 
+      {showEdit && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+
+          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
+
+            <div className="mb-6 flex items-center justify-between">
+
+              <h2 className="text-2xl font-bold">
+                Edit Profile
+              </h2>
+
+              <button onClick={() => setShowEdit(false)}>
+                <X />
+              </button>
+
+            </div>
+
+            <div className="space-y-4">
+
+              <input
+                type="text"
+                value={form.name}
+                placeholder="Full Name"
+                onChange={(e) =>
+                  setForm({ ...form, name: e.target.value })
+                }
+                className="w-full rounded-xl border p-3"
+              />
+
+              <input
+                type="text"
+                value={form.phone}
+                placeholder="Phone"
+                onChange={(e) =>
+                  setForm({ ...form, phone: e.target.value })
+                }
+                className="w-full rounded-xl border p-3"
+              />
+
+              <input
+                type="text"
+                value={form.address}
+                placeholder="Address"
+                onChange={(e) =>
+                  setForm({ ...form, address: e.target.value })
+                }
+                className="w-full rounded-xl border p-3"
+              />
+
+              <button
+                onClick={handleSave}
+                className="w-full rounded-xl bg-green-600 py-3 font-semibold text-white hover:bg-green-700"
+              >
+                Save Changes
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+      )}
 
     </main>
-
   );
-
 }
