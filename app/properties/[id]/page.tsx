@@ -311,7 +311,7 @@ export default function PropertyDetailsPage() {
             <div className="mt-8 flex gap-4">
 
               <button
-                onClick={() => router.push("/chat")}
+                onClick={() => router.push("/messages")}
                 className="rounded-xl bg-green-600 px-8 py-3 font-semibold text-white hover:bg-green-700"
               >
                 Message Agent
