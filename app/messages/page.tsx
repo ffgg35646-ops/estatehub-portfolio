@@ -10,7 +10,7 @@ import {
 interface Message {
   id: number;
   text: string;
-  sender: "me" | "other";
+  sender:string;
   time: string;
 }
 
