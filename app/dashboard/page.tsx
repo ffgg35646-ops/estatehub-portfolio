@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
-  Home,
   Heart,
   MessageSquare,
   User,
@@ -51,83 +50,59 @@ export default function DashboardPage() {
   return (
     <main className="min-h-screen bg-[#eef6ef]">
 
-      {/* ================= HERO ================= */}
+      {/* HERO */}
 
       <section className="relative overflow-hidden">
-
-        {/* Background Image */}
 
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1800')",
+              "url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=2000&auto=format&fit=crop')",
           }}
         />
 
-        {/* Green Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0f3d22]/90 via-[#16552f]/80 to-[#2b7a46]/70" />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#10391e]/90 via-[#245535]/80 to-[#4d8f61]/70" />
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-12 left-16 h-44 w-44 rounded-full bg-white blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 h-72 w-72 rounded-full bg-green-300 blur-3xl"></div>
+        </div>
 
-        {/* Decorative Blur */}
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-8 py-24">
 
-        <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-green-400/20 blur-3xl" />
-        <div className="absolute right-0 bottom-0 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
-
-        {/* Content */}
-
-        <div className="relative mx-auto flex max-w-7xl flex-col justify-between gap-12 px-8 py-24 lg:flex-row lg:items-center">
-
-          {/* Left */}
-
-          <div className="max-w-2xl">
+          <div className="max-w-3xl">
 
             <span className="rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold backdrop-blur-md">
-              🏡 EstateHub Premium Dashboard
+              EstateHub Dashboard
             </span>
 
             <h1 className="mt-8 text-6xl font-black leading-tight text-white">
-
-              Welcome Back
-
+              Welcome back,
               <br />
-
               <span className="text-green-200">
                 {user.name}
               </span>
-
             </h1>
 
-            <p className="mt-8 max-w-xl text-lg leading-8 text-green-100">
-
-              Discover luxury villas, modern apartments,
-              exclusive properties and premium investment
-              opportunities around the world.
-
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-green-50">
+              Manage your properties, explore premium listings,
+              save your favorites and connect with buyers
+              through one modern dashboard.
             </p>
 
-            {/* Search */}
-
             <div className="mt-10 flex max-w-xl overflow-hidden rounded-2xl bg-white shadow-2xl">
-
               <input
                 type="text"
                 placeholder="Search property, city..."
                 className="flex-1 px-6 py-4 text-gray-700 outline-none"
               />
-
               <button className="bg-green-700 px-8 text-white transition hover:bg-green-800">
-
                 <Search size={22} />
-
               </button>
-
             </div>
 
-            {/* Buttons */}
-
             <div className="mt-8 flex flex-wrap gap-4">
-
               <Link
                 href="/properties"
                 className="rounded-xl bg-green-700 px-8 py-4 font-semibold text-white transition hover:bg-green-800"
@@ -141,58 +116,360 @@ export default function DashboardPage() {
               >
                 Add Property
               </Link>
+            </div>
+
+          </div>
+
+          <div className="hidden lg:flex">
+            <div className="rounded-[40px] border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-xl">
+              <img
+                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=900&auto=format&fit=crop"
+                alt="Luxury House"
+                className="h-[320px] w-[460px] rounded-3xl object-cover"
+              />
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section className="bg-gradient-to-b from-[#eef8f0] via-[#f8fcf8] to-[#edf7ef] py-12">
+        <div className="mx-auto max-w-7xl px-8">
+          <div className="mb-10 grid gap-6 md:grid-cols-4">
+
+            <div className="rounded-3xl border border-green-100 bg-white p-6 shadow-lg">
+              <p className="text-sm text-gray-500">
+                Published Properties
+              </p>
+              <h2 className="mt-3 text-4xl font-black text-green-700">
+                0
+              </h2>
+              <p className="mt-2 text-sm text-gray-500">
+                No property published yet.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-green-100 bg-white p-6 shadow-lg">
+              <p className="text-sm text-gray-500">
+                Favorites
+              </p>
+              <h2 className="mt-3 text-4xl font-black text-red-500">
+                0
+              </h2>
+              <p className="mt-2 text-sm text-gray-500">
+                No saved properties.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-green-100 bg-white p-6 shadow-lg">
+              <p className="text-sm text-gray-500">
+                Messages
+              </p>
+              <h2 className="mt-3 text-4xl font-black text-blue-600">
+                0
+              </h2>
+              <p className="mt-2 text-sm text-gray-500">
+                No conversations yet.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-green-100 bg-white p-6 shadow-lg">
+              <p className="text-sm text-gray-500">
+                Transactions
+              </p>
+              <h2 className="mt-3 text-4xl font-black text-orange-500">
+                0
+              </h2>
+              <p className="mt-2 text-sm text-gray-500">
+                No purchases or sales.
+              </p>
+            </div>
+
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-4">
+
+            <Link
+              href="/profile"
+              className="group rounded-[28px] border border-green-100 bg-white p-8 shadow-lg transition hover:-translate-y-2 hover:shadow-2xl"
+            >
+              <User size={42} className="text-green-600" />
+              <h3 className="mt-6 text-2xl font-bold">
+                My Profile
+              </h3>
+              <p className="mt-3 text-gray-500">
+                Manage your account information and personal settings.
+              </p>
+              <span className="mt-8 inline-flex items-center gap-2 font-bold text-green-700">
+                Open
+                <ArrowRight size={18} />
+              </span>
+            </Link>
+
+            <Link
+              href="/properties"
+              className="group rounded-[28px] border border-green-100 bg-white p-8 shadow-lg transition hover:-translate-y-2 hover:shadow-2xl"
+            >
+              <Search size={42} className="text-green-600" />
+              <h3 className="mt-6 text-2xl font-bold">
+                Browse Properties
+              </h3>
+              <p className="mt-3 text-gray-500">
+                Discover apartments, villas and luxury homes.
+              </p>
+              <span className="mt-8 inline-flex items-center gap-2 font-bold text-green-700">
+                Browse
+                <ArrowRight size={18} />
+              </span>
+            </Link>
+
+            <Link
+              href="/favorites"
+              className="group rounded-[28px] border border-green-100 bg-white p-8 shadow-lg transition hover:-translate-y-2 hover:shadow-2xl"
+            >
+              <Heart size={42} className="text-red-500" />
+              <h3 className="mt-6 text-2xl font-bold">
+                Favorites
+              </h3>
+              <p className="mt-3 text-gray-500">
+                View every property you've saved.
+              </p>
+              <span className="mt-8 inline-flex items-center gap-2 font-bold text-red-500">
+                View
+                <ArrowRight size={18} />
+              </span>
+            </Link>
+
+            <Link
+              href="/messages"
+              className="group rounded-[28px] border border-green-100 bg-white p-8 shadow-lg transition hover:-translate-y-2 hover:shadow-2xl"
+            >
+              <MessageSquare size={42} className="text-blue-600" />
+              <h3 className="mt-6 text-2xl font-bold">
+                Messages
+              </h3>
+              <p className="mt-3 text-gray-500">
+                Contact owners and manage conversations.
+              </p>
+              <span className="mt-8 inline-flex items-center gap-2 font-bold text-blue-600">
+                Open
+                <ArrowRight size={18} />
+              </span>
+            </Link>
+
+                  </div>
+
+                      </div>
+
+          <div className="mt-14 grid gap-8 lg:grid-cols-3">
+
+            <div className="lg:col-span-2 rounded-[32px] bg-white p-8 shadow-xl">
+
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <h2 className="text-3xl font-black text-green-900">
+                    Quick Actions
+                  </h2>
+                  <p className="mt-2 text-gray-500">
+                    Everything you need is one click away.
+                  </p>
+                </div>
+
+                <div className="rounded-full bg-green-50 px-4 py-2 text-sm font-semibold text-green-700">
+                  EstateHub
+                </div>
+              </div>
+
+              <div className="mt-8 grid gap-5 sm:grid-cols-2">
+
+                <Link
+                  href="/add-property"
+                  className="rounded-3xl border border-green-100 p-6 transition hover:border-green-500 hover:bg-green-50"
+                >
+                  <Home size={34} className="text-green-700" />
+                  <h3 className="mt-4 text-xl font-bold">
+                    Sell Property
+                  </h3>
+                  <p className="mt-2 text-gray-500">
+                    Publish your first property.
+                  </p>
+                </Link>
+
+                <Link
+                  href="/properties"
+                  className="rounded-3xl border border-green-100 p-6 transition hover:border-green-500 hover:bg-green-50"
+                >
+                  <Search size={34} className="text-green-700" />
+                  <h3 className="mt-4 text-xl font-bold">
+                    Buy Property
+                  </h3>
+                  <p className="mt-2 text-gray-500">
+                    Browse available listings.
+                  </p>
+                </Link>
+
+                <Link
+                  href="/favorites"
+                  className="rounded-3xl border border-green-100 p-6 transition hover:border-green-500 hover:bg-green-50"
+                >
+                  <Heart size={34} className="text-red-500" />
+                  <h3 className="mt-4 text-xl font-bold">
+                    Favorites
+                  </h3>
+                  <p className="mt-2 text-gray-500">
+                    Open your saved properties.
+                  </p>
+                </Link>
+
+                <Link
+                  href="/messages"
+                  className="rounded-3xl border border-green-100 p-6 transition hover:border-green-500 hover:bg-green-50"
+                >
+                  <MessageSquare size={34} className="text-blue-600" />
+                  <h3 className="mt-4 text-xl font-bold">
+                    Messages
+                  </h3>
+                  <p className="mt-2 text-gray-500">
+                    Manage your conversations.
+                  </p>
+                </Link>
+
+              </div>
+
+              <div className="mt-10 grid gap-4 md:grid-cols-3">
+
+                <Link
+                  href="/properties"
+                  className="rounded-2xl bg-green-50 p-5 transition hover:bg-green-100"
+                >
+                  <BedDouble className="text-green-700" />
+                  <p className="mt-3 font-bold text-green-900">
+                    Apartments
+                  </p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Browse apartment listings.
+                  </p>
+                </Link>
+
+                <Link
+                  href="/properties"
+                  className="rounded-2xl bg-green-50 p-5 transition hover:bg-green-100"
+                >
+                  <Bath className="text-green-700" />
+                  <p className="mt-3 font-bold text-green-900">
+                    Villas
+                  </p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    See premium villa options.
+                  </p>
+                </Link>
+
+                <Link
+                  href="/properties"
+                  className="rounded-2xl bg-green-50 p-5 transition hover:bg-green-100"
+                >
+                  <MapPin className="text-green-700" />
+                  <p className="mt-3 font-bold text-green-900">
+                    Locations
+                  </p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Explore top neighborhoods.
+                  </p>
+                </Link>
+
+              </div>
+
+            </div>
+
+            <div className="rounded-[32px] bg-white p-8 shadow-xl">
+
+              <div className="flex items-center gap-3">
+                <Sparkles className="text-green-700" />
+                <h2 className="text-2xl font-black text-green-900">
+                  Getting Started
+                </h2>
+              </div>
+
+              <div className="mt-8 space-y-4">
+
+                <div className="rounded-2xl bg-green-50 p-4">
+                  <p className="font-bold text-green-900">
+                    Complete your profile
+                  </p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Add your personal details and contact info.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-green-50 p-4">
+                  <p className="font-bold text-green-900">
+                    Browse properties
+                  </p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Start exploring the available listings.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-green-50 p-4">
+                  <p className="font-bold text-green-900">
+                    Save your favorites
+                  </p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Keep the properties you like in one place.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-green-50 p-4">
+                  <p className="font-bold text-green-900">
+                    Publish your first property
+                  </p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Add a listing when you are ready.
+                  </p>
+                </div>
+
+              </div>
 
             </div>
 
           </div>
 
-          {/* Right Card */}
+          <div className="mt-14 rounded-[32px] bg-white p-8 shadow-xl">
 
-          <div className="w-full max-w-md rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-xl">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h2 className="text-3xl font-black text-green-900">
+                  Recent Activity
+                </h2>
+                <p className="mt-2 text-gray-500">
+                  You have not done anything yet.
+                </p>
+              </div>
 
-            <h2 className="mb-6 text-2xl font-bold text-white">
-              Featured Villa
-            </h2>
-
-            <img
-              src="https://images.unsplash.com/photo-1613977257365-aaae5a9817ff?w=900"
-              className="h-56 w-full rounded-2xl object-cover"
-            />
-
-            <h3 className="mt-6 text-2xl font-bold text-white">
-              Luxury Forest Villa
-            </h3>
-
-            <p className="mt-2 flex items-center gap-2 text-green-100">
-              <MapPin size={18} />
-              Beverly Hills
-            </p>
-
-            <div className="mt-6 flex justify-between text-green-100">
-
-              <span className="flex items-center gap-2">
-                <BedDouble size={18} />
-                5 Beds
+              <span className="rounded-full bg-green-50 px-4 py-2 text-sm font-semibold text-green-700">
+                New account
               </span>
-
-              <span className="flex items-center gap-2">
-                <Bath size={18} />
-                4 Baths
-              </span>
-
             </div>
 
-            <div className="mt-8 flex items-center justify-between">
+            <div className="mt-6 rounded-3xl border border-dashed border-green-200 bg-green-50 p-10 text-center">
 
-              <span className="text-3xl font-black text-white">
-                $1.2M
-              </span>
+              <Building2 size={60} className="mx-auto text-green-300" />
+
+              <h3 className="mt-5 text-2xl font-bold text-green-900">
+                No activity yet
+              </h3>
+
+              <p className="mt-3 text-gray-500">
+                Once you browse, save favorites, send messages, or add a property,
+                your latest activity will appear here automatically.
+              </p>
 
               <Link
                 href="/properties"
-                className="rounded-xl bg-white px-5 py-3 font-semibold text-green-700 transition hover:bg-green-100"
+                className="mt-8 inline-flex rounded-xl bg-green-700 px-6 py-3 font-semibold text-white transition hover:bg-green-800"
               >
-                View
+                Browse Properties
               </Link>
 
             </div>
@@ -200,278 +477,8 @@ export default function DashboardPage() {
           </div>
 
         </div>
-
       </section>
 
-      {/* ================= START CONTENT ================= */}
-
-      <section className="mx-auto max-w-7xl px-8 py-14">
-        {/* ================= QUICK STATS ================= */}
-
-<div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-
-  <div className="rounded-3xl bg-white p-8 shadow-lg transition hover:-translate-y-2 hover:shadow-2xl">
-    <Building2 className="mb-4 text-green-700" size={34} />
-    <p className="text-sm text-gray-500">Properties</p>
-    <h2 className="mt-2 text-4xl font-black text-green-800">248</h2>
-    <p className="mt-3 text-green-600 font-semibold">+12 This Week</p>
-  </div>
-
-  <div className="rounded-3xl bg-white p-8 shadow-lg transition hover:-translate-y-2 hover:shadow-2xl">
-    <Heart className="mb-4 text-red-500" size={34} />
-    <p className="text-sm text-gray-500">Favorites</p>
-    <h2 className="mt-2 text-4xl font-black">19</h2>
-    <p className="mt-3 text-red-500 font-semibold">Saved Properties</p>
-  </div>
-
-  <div className="rounded-3xl bg-white p-8 shadow-lg transition hover:-translate-y-2 hover:shadow-2xl">
-    <MessageSquare className="mb-4 text-blue-600" size={34} />
-    <p className="text-sm text-gray-500">Messages</p>
-    <h2 className="mt-2 text-4xl font-black">7</h2>
-    <p className="mt-3 text-blue-600 font-semibold">Unread</p>
-  </div>
-
-  <div className="rounded-3xl bg-white p-8 shadow-lg transition hover:-translate-y-2 hover:shadow-2xl">
-    <User className="mb-4 text-green-700" size={34} />
-    <p className="text-sm text-gray-500">Profile</p>
-    <h2 className="mt-2 text-4xl font-black">100%</h2>
-    <p className="mt-3 text-green-600 font-semibold">Completed</p>
-  </div>
-
-</div>
-
-{/* ================= FEATURED ================= */}
-
-<div className="mt-16">
-
-  <div className="flex items-center justify-between">
-
-    <div>
-
-      <h2 className="text-4xl font-black text-green-900">
-        Featured Properties
-      </h2>
-
-      <p className="mt-2 text-gray-500">
-        Hand-picked luxury homes.
-      </p>
-
-    </div>
-
-    <Link
-      href="/properties"
-      className="rounded-xl bg-green-700 px-6 py-3 font-semibold text-white hover:bg-green-800"
-    >
-      View All
-    </Link>
-
-  </div>
-
-  <div className="mt-8 grid gap-8 lg:grid-cols-3">
-
-    {[1,2,3].map((item)=>(
-      <div
-        key={item}
-        className="overflow-hidden rounded-3xl bg-white shadow-xl transition hover:-translate-y-2 hover:shadow-2xl"
-      >
-
-        <img
-          src={`https://picsum.photos/600/400?random=${item}`}
-          className="h-64 w-full object-cover"
-        />
-
-        <div className="p-6">
-
-          <h3 className="text-2xl font-bold">
-            Luxury Green Villa
-          </h3>
-
-          <p className="mt-2 flex items-center gap-2 text-gray-500">
-            <MapPin size={18}/>
-            Dubai Marina
-          </p>
-
-          <div className="mt-5 flex justify-between">
-
-            <span className="flex items-center gap-2 text-gray-600">
-              <BedDouble size={18}/>
-              5 Beds
-            </span>
-
-            <span className="flex items-center gap-2 text-gray-600">
-              <Bath size={18}/>
-              4 Baths
-            </span>
-
-          </div>
-
-          <div className="mt-6 flex items-center justify-between">
-
-            <span className="text-3xl font-black text-green-700">
-              $980,000
-            </span>
-
-            <button className="rounded-xl bg-green-700 px-5 py-3 text-white hover:bg-green-800">
-              Details
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-    ))}
-
-  </div>
-
-</div>
-        {/* ================= QUICK ACTIONS ================= */}
-
-<div className="mt-20 grid gap-8 lg:grid-cols-3">
-
-  <div className="lg:col-span-2 rounded-3xl bg-white p-8 shadow-xl">
-
-    <h2 className="text-3xl font-black text-green-900">
-      Quick Actions
-    </h2>
-
-    <p className="mt-2 text-gray-500">
-      Everything you need is one click away.
-    </p>
-
-    <div className="mt-8 grid gap-6 md:grid-cols-2">
-
-      <Link
-        href="/add-property"
-        className="rounded-2xl border border-green-100 p-6 transition hover:bg-green-50 hover:border-green-400"
-      >
-        <Plus className="mb-4 text-green-700" size={34} />
-        <h3 className="text-xl font-bold">Add Property</h3>
-        <p className="mt-2 text-gray-500">
-          Publish a new apartment, villa or office.
-        </p>
-      </Link>
-
-      <Link
-        href="/properties"
-        className="rounded-2xl border border-green-100 p-6 transition hover:bg-green-50 hover:border-green-400"
-      >
-        <Search className="mb-4 text-green-700" size={34} />
-        <h3 className="text-xl font-bold">Browse Listings</h3>
-        <p className="mt-2 text-gray-500">
-          Explore available properties.
-        </p>
-      </Link>
-
-      <Link
-        href="/favorites"
-        className="rounded-2xl border border-green-100 p-6 transition hover:bg-green-50 hover:border-green-400"
-      >
-        <Heart className="mb-4 text-red-500" size={34} />
-        <h3 className="text-xl font-bold">Favorites</h3>
-        <p className="mt-2 text-gray-500">
-          View saved properties.
-        </p>
-      </Link>
-
-      <Link
-        href="/messages"
-        className="rounded-2xl border border-green-100 p-6 transition hover:bg-green-50 hover:border-green-400"
-      >
-        <MessageSquare className="mb-4 text-blue-600" size={34} />
-        <h3 className="text-xl font-bold">Inbox</h3>
-        <p className="mt-2 text-gray-500">
-          Read your latest conversations.
-        </p>
-      </Link>
-
-    </div>
-
-  </div>
-
-  {/* Right */}
-
-  <div className="rounded-3xl bg-white p-8 shadow-xl">
-
-    <h2 className="text-3xl font-black text-green-900">
-      Recent Activity
-    </h2>
-
-    <div className="mt-8 space-y-5">
-
-      <div className="rounded-xl bg-green-50 p-5">
-        <p className="font-bold text-green-800">
-          ✔ Property Published
-        </p>
-        <span className="text-sm text-gray-500">
-          2 hours ago
-        </span>
-      </div>
-
-      <div className="rounded-xl bg-green-50 p-5">
-        <p className="font-bold text-green-800">
-          ❤ Villa Saved
-        </p>
-        <span className="text-sm text-gray-500">
-          Yesterday
-        </span>
-      </div>
-
-      <div className="rounded-xl bg-green-50 p-5">
-        <p className="font-bold text-green-800">
-          💬 New Message
-        </p>
-        <span className="text-sm text-gray-500">
-          3 days ago
-        </span>
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-{/* ================= CTA ================= */}
-
-<div className="mt-20 overflow-hidden rounded-[35px]">
-
-  <div
-    className="relative h-[320px] bg-cover bg-center"
-    style={{
-      backgroundImage:
-        "url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1800')",
-    }}
-  >
-
-    <div className="absolute inset-0 bg-gradient-to-r from-[#173b22]/90 via-[#245535]/80 to-[#4b8d61]/70" />
-
-    <div className="relative flex h-full flex-col items-center justify-center text-center px-8">
-
-      <h2 className="text-5xl font-black text-white">
-        Find Your Dream Home
-      </h2>
-
-      <p className="mt-5 max-w-2xl text-lg text-green-100">
-        Explore thousands of premium apartments, villas,
-        penthouses and investment opportunities.
-      </p>
-
-      <Link
-        href="/properties"
-        className="mt-8 rounded-2xl bg-white px-8 py-4 font-bold text-green-800 transition hover:scale-105"
-      >
-        Explore Properties
-      </Link>
-
-    </div>
-
-  </div>
-
-</div>
-
-</section>
-
-</main>
-);
+    </main>
+  );
 }
