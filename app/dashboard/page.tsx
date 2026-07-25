@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
+  Home,
   Heart,
   MessageSquare,
   User,
@@ -39,52 +39,37 @@ export default function DashboardPage() {
 
   if (!user) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-xl font-semibold">
+      <div className="flex min-h-screen items-center justify-center text-xl font-semibold bg-[#f8faf9] text-emerald-950">
         Loading...
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-[#eef6ef] pb-16">
+    <main className="min-h-screen bg-[#f8faf9] pb-20">
 
-      {/* ================= HERO ================= */}
+      {/* هيدر شيك وأنيق بلون أخضر زمردي داكن مع خلفية شبكية/معمارية هادئة جداً */}
+      <section className="relative bg-[#0f382c] text-white pt-12 pb-24 px-6 overflow-hidden">
+        
+        {/* خلفية هندسية ناعمة جداً في الـ Pattern تدل على العقارات دون تشويش */}
+        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}></div>
 
-      <section className="relative overflow-hidden text-white">
-
-        {/* صورة بيت حقيقية */}
-        <Image
-          src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=2000&auto=format&fit=crop"
-          alt="House"
-          fill
-          priority
-          className="object-cover"
-        />
-
-        {/* طبقة خضراء */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#123b22]/90 via-[#1d5a34]/85 to-[#3b8c55]/80" />
-
-        {/* دوائر خفيفة */}
-        <div className="absolute inset-0">
-          <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
-          <div className="absolute right-10 bottom-0 h-80 w-80 rounded-full bg-green-300/10 blur-3xl" />
-        </div>
-
-        <div className="relative mx-auto flex max-w-7xl flex-col items-center justify-between gap-10 px-6 py-20 lg:flex-row">
+        <div className="relative mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 lg:flex-row z-10">
 
           <div className="max-w-2xl">
 
-            <span className="rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold backdrop-blur-md">
+            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 border border-emerald-400/30 px-4 py-1.5 text-xs font-medium text-emerald-200">
+              <Sparkles size={14} className="text-emerald-400" />
               EstateHub Dashboard
             </span>
 
-            <h1 className="mt-6 text-5xl font-extrabold leading-tight drop-shadow-lg">
+            <h1 className="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight text-white">
               Welcome back,
               <br />
-              {user.name} 👋
+              <span className="text-emerald-400">{user.name}</span> 👋
             </h1>
 
-            <p className="mt-6 max-w-xl text-lg leading-8 text-green-100">
+            <p className="mt-4 max-w-xl text-base sm:text-lg text-emerald-100/80 leading-relaxed">
               Manage your properties, explore new listings,
               keep track of your favorites and stay connected
               with buyers and sellers.
@@ -94,14 +79,14 @@ export default function DashboardPage() {
 
               <Link
                 href="/properties"
-                className="rounded-xl bg-white px-6 py-3 font-semibold text-green-800 shadow-lg transition hover:scale-105"
+                className="rounded-xl bg-emerald-500 px-6 py-3 font-semibold text-emerald-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-900/40"
               >
                 Browse Properties
               </Link>
 
               <Link
                 href="/add-property"
-                className="rounded-xl border border-white bg-white/10 px-6 py-3 font-semibold backdrop-blur transition hover:bg-white hover:text-green-800"
+                className="rounded-xl border border-emerald-500/30 bg-emerald-900/30 backdrop-blur-sm px-6 py-3 font-semibold text-white transition hover:bg-emerald-800/50 hover:border-emerald-400"
               >
                 Add Property
               </Link>
@@ -110,9 +95,9 @@ export default function DashboardPage() {
 
           </div>
 
-          <div className="flex h-48 w-48 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur-xl shadow-2xl">
+          <div className="flex h-36 w-36 sm:h-44 sm:w-44 items-center justify-center rounded-3xl bg-emerald-800/30 border border-emerald-500/20 backdrop-blur-md text-emerald-300 shadow-2xl">
 
-            <Building2 size={90} />
+            <Building2 size={80} strokeWidth={1.5} />
 
           </div>
 
@@ -120,38 +105,128 @@ export default function DashboardPage() {
 
       </section>
 
-      {/* خلفية القسم بالكامل بدل الرمادي */}
-      <section className="mx-auto -mt-10 max-w-7xl rounded-[40px] bg-gradient-to-b from-[#edf8ef] via-[#f5fbf6] to-[#edf8ef] px-6 py-10 shadow-xl">
+      {/* الكروت بـ mt-12 هادئة فوق الهيدر بدون ما تتغطى إطلاقاً */}
+      <section className="relative z-20 mx-auto -mt-12 max-w-7xl px-6">
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-                  <div className="mt-10 grid gap-8 lg:grid-cols-3">
 
-          <div className="rounded-3xl bg-white p-8 shadow-xl lg:col-span-2">
+          <Link
+            href="/profile"
+            className="group rounded-2xl bg-white p-6 shadow-sm border border-emerald-950/5 transition-all hover:-translate-y-1 hover:shadow-xl hover:border-emerald-200"
+          >
+            <User className="mb-4 text-emerald-600" size={32} />
+
+            <h3 className="text-lg font-bold text-gray-900">
+              My Profile
+            </h3>
+
+            <p className="mt-1.5 text-sm text-gray-500 leading-relaxed">
+              Update your personal information and account settings.
+            </p>
+
+            <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 group-hover:gap-3 transition-all">
+              Open
+              <ArrowRight size={16} />
+            </span>
+
+          </Link>
+
+          <Link
+            href="/properties"
+            className="group rounded-2xl bg-white p-6 shadow-sm border border-emerald-950/5 transition-all hover:-translate-y-1 hover:shadow-xl hover:border-emerald-200"
+          >
+            <Search className="mb-4 text-emerald-600" size={32} />
+
+            <h3 className="text-lg font-bold text-gray-900">
+              Browse
+            </h3>
+
+            <p className="mt-1.5 text-sm text-gray-500 leading-relaxed">
+              Explore the latest apartments, villas and houses.
+            </p>
+
+            <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 group-hover:gap-3 transition-all">
+              Explore
+              <ArrowRight size={16} />
+            </span>
+
+          </Link>
+
+          <Link
+            href="/favorites"
+            className="group rounded-2xl bg-white p-6 shadow-sm border border-emerald-950/5 transition-all hover:-translate-y-1 hover:shadow-xl hover:border-red-200"
+          >
+            <Heart className="mb-4 text-rose-500" size={32} />
+
+            <h3 className="text-lg font-bold text-gray-900">
+              Favorites
+            </h3>
+
+            <p className="mt-1.5 text-sm text-gray-500 leading-relaxed">
+              Quickly access all saved properties.
+            </p>
+
+            <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-rose-500 group-hover:gap-3 transition-all">
+              View
+              <ArrowRight size={16} />
+            </span>
+
+          </Link>
+
+          <Link
+            href="/messages"
+            className="group rounded-2xl bg-white p-6 shadow-sm border border-emerald-950/5 transition-all hover:-translate-y-1 hover:shadow-xl hover:border-blue-200"
+          >
+            <MessageSquare className="mb-4 text-blue-600" size={32} />
+
+            <h3 className="text-lg font-bold text-gray-900">
+              Messages
+            </h3>
+
+            <p className="mt-1.5 text-sm text-gray-500 leading-relaxed">
+              Read conversations and contact property owners.
+            </p>
+
+            <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-600 group-hover:gap-3 transition-all">
+              Open
+              <ArrowRight size={16} />
+            </span>
+
+          </Link>
+
+        </div>
+
+        <div className="mt-8 grid gap-8 lg:grid-cols-3">
+
+          <div className="rounded-2xl bg-white p-7 shadow-sm border border-emerald-950/5 lg:col-span-2">
 
             <div className="flex items-center gap-3">
-              <Sparkles className="text-green-700" />
-              <h2 className="text-2xl font-bold">
+
+              <Sparkles className="text-emerald-600" size={22} />
+
+              <h2 className="text-xl font-bold text-gray-900">
                 Quick Actions
               </h2>
+
             </div>
 
-            <p className="mt-2 text-gray-500">
+            <p className="mt-1 text-sm text-gray-500">
               Everything you need is just one click away.
             </p>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
 
               <Link
                 href="/add-property"
-                className="rounded-2xl border border-green-100 p-6 transition hover:border-green-600 hover:bg-green-50"
+                className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 transition hover:border-emerald-500/30 hover:bg-emerald-50/30"
               >
-                <Plus className="mb-4 text-green-700" size={30} />
+                <Plus className="mb-3 text-emerald-600" size={26} />
 
-                <h3 className="font-bold">
+                <h3 className="font-bold text-gray-900 text-sm">
                   Add New Property
                 </h3>
 
-                <p className="mt-2 text-sm text-gray-500">
+                <p className="mt-1 text-xs text-gray-500">
                   Publish your apartment, villa or office.
                 </p>
 
@@ -159,15 +234,15 @@ export default function DashboardPage() {
 
               <Link
                 href="/properties"
-                className="rounded-2xl border border-green-100 p-6 transition hover:border-green-600 hover:bg-green-50"
+                className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 transition hover:border-emerald-500/30 hover:bg-emerald-50/30"
               >
-                <Search className="mb-4 text-green-700" size={30} />
+                <Search className="mb-3 text-emerald-600" size={26} />
 
-                <h3 className="font-bold">
+                <h3 className="font-bold text-gray-900 text-sm">
                   Explore Listings
                 </h3>
 
-                <p className="mt-2 text-sm text-gray-500">
+                <p className="mt-1 text-xs text-gray-500">
                   Browse all available properties.
                 </p>
 
@@ -175,15 +250,15 @@ export default function DashboardPage() {
 
               <Link
                 href="/favorites"
-                className="rounded-2xl border border-red-100 p-6 transition hover:border-red-500 hover:bg-red-50"
+                className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 transition hover:border-rose-500/30 hover:bg-rose-50/30"
               >
-                <Heart className="mb-4 text-red-500" size={30} />
+                <Heart className="mb-3 text-rose-500" size={26} />
 
-                <h3 className="font-bold">
+                <h3 className="font-bold text-gray-900 text-sm">
                   Saved Properties
                 </h3>
 
-                <p className="mt-2 text-sm text-gray-500">
+                <p className="mt-1 text-xs text-gray-500">
                   View your favorite listings anytime.
                 </p>
 
@@ -191,15 +266,15 @@ export default function DashboardPage() {
 
               <Link
                 href="/messages"
-                className="rounded-2xl border border-blue-100 p-6 transition hover:border-blue-500 hover:bg-blue-50"
+                className="rounded-xl border border-gray-100 bg-gray-50/50 p-5 transition hover:border-blue-500/30 hover:bg-blue-50/30"
               >
-                <MessageSquare className="mb-4 text-blue-600" size={30} />
+                <MessageSquare className="mb-3 text-blue-600" size={26} />
 
-                <h3 className="font-bold">
+                <h3 className="font-bold text-gray-900 text-sm">
                   Inbox
                 </h3>
 
-                <p className="mt-2 text-sm text-gray-500">
+                <p className="mt-1 text-xs text-gray-500">
                   Stay connected with buyers and sellers.
                 </p>
 
@@ -209,37 +284,37 @@ export default function DashboardPage() {
 
           </div>
 
-          <div className="rounded-3xl bg-white p-8 shadow-xl">
+          <div className="rounded-2xl bg-white p-7 shadow-sm border border-emerald-950/5">
 
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-xl font-bold text-gray-900">
               Getting Started
             </h2>
 
-            <div className="mt-8 space-y-5">
+            <div className="mt-6 space-y-4">
 
-              <div className="rounded-xl bg-green-50 p-4">
-                <p className="font-semibold">
+              <div className="rounded-xl bg-emerald-50/50 border border-emerald-100/60 p-4">
+                <p className="font-semibold text-sm text-emerald-950">
                   Complete your profile
                 </p>
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-0.5 text-xs text-emerald-800/70">
                   Add your phone number and address.
                 </p>
               </div>
 
-              <div className="rounded-xl bg-green-50 p-4">
-                <p className="font-semibold">
+              <div className="rounded-xl bg-gray-50 border border-gray-100 p-4">
+                <p className="font-semibold text-sm text-gray-900">
                   Publish your first property
                 </p>
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-0.5 text-xs text-gray-500">
                   Create a professional listing with photos.
                 </p>
               </div>
 
-              <div className="rounded-xl bg-green-50 p-4">
-                <p className="font-semibold">
+              <div className="rounded-xl bg-gray-50 border border-gray-100 p-4">
+                <p className="font-semibold text-sm text-gray-900">
                   Save interesting properties
                 </p>
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-0.5 text-xs text-gray-500">
                   Build your own favorites collection.
                 </p>
               </div>
@@ -250,31 +325,31 @@ export default function DashboardPage() {
 
         </div>
 
-        <div className="mt-10 rounded-3xl bg-white p-8 shadow-xl">
+        <div className="mt-8 rounded-2xl bg-white p-7 shadow-sm border border-emerald-950/5">
 
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-xl font-bold text-gray-900">
             Recent Activity
           </h2>
 
-          <div className="mt-6 rounded-2xl border-2 border-dashed border-green-200 bg-green-50 p-12 text-center">
+          <div className="mt-6 rounded-xl border border-dashed border-gray-200 p-10 text-center bg-gray-50/50">
 
             <Building2
-              size={60}
-              className="mx-auto text-green-300"
+              size={50}
+              className="mx-auto text-gray-300"
             />
 
-            <h3 className="mt-5 text-2xl font-bold">
+            <h3 className="mt-4 text-xl font-bold text-gray-800">
               No activity yet
             </h3>
 
-            <p className="mt-3 text-gray-500">
+            <p className="mt-2 text-sm text-gray-500 max-w-md mx-auto">
               Once you add properties, save favorites or send messages,
               your latest activity will appear here automatically.
             </p>
 
             <Link
               href="/properties"
-              className="mt-8 inline-flex rounded-xl bg-green-700 px-6 py-3 font-semibold text-white transition hover:bg-green-800"
+              className="mt-6 inline-flex rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 transition"
             >
               Explore Properties
             </Link>
@@ -288,4 +363,3 @@ export default function DashboardPage() {
     </main>
   );
 }
-          
