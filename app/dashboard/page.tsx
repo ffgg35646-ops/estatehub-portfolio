@@ -39,60 +39,66 @@ export default function DashboardPage() {
 
   if (!user) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-xl font-semibold">
+      <div className="flex min-h-screen items-center justify-center text-xl font-semibold bg-[#f0f4f2]">
         Loading...
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 pb-16">
+    <main className="min-h-screen bg-[#f0f4f2] pb-16">
 
-      <section className="bg-gradient-to-r from-green-700 via-green-600 to-emerald-500 text-white">
+      {/* قسم الهيدر خلفية صورة عقار حقيقي مع طبقة خضراء شفافة تحفظ وضوح النصوص */}
+      <section className="relative overflow-hidden bg-cover bg-center text-white" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1600&auto=format&fit=crop')" }}>
+        
+        {/* Overlay أخضر متدرج يحافظ على التباين والنصوص */}
+        <div className="bg-gradient-to-r from-green-950/90 via-green-800/85 to-emerald-700/80 backdrop-blur-xs">
 
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-10 px-6 py-16 lg:flex-row">
+          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-10 px-6 py-16 lg:flex-row">
 
-          <div className="max-w-2xl">
+            <div className="max-w-2xl">
 
-            <span className="rounded-full bg-white/20 px-4 py-2 text-sm font-semibold">
-              EstateHub Dashboard
-            </span>
+              <span className="rounded-full bg-white/20 px-4 py-2 text-sm font-semibold backdrop-blur-md">
+                EstateHub Dashboard
+              </span>
 
-            <h1 className="mt-6 text-5xl font-extrabold leading-tight">
-              Welcome back,
-              <br />
-              {user.name} 👋
-            </h1>
+              <h1 className="mt-6 text-5xl font-extrabold leading-tight">
+                Welcome back,
+                <br />
+                {user.name} 👋
+              </h1>
 
-            <p className="mt-6 max-w-xl text-lg text-green-100">
-              Manage your properties, explore new listings,
-              keep track of your favorites and stay connected
-              with buyers and sellers.
-            </p>
+              <p className="mt-6 max-w-xl text-lg text-green-100">
+                Manage your properties, explore new listings,
+                keep track of your favorites and stay connected
+                with buyers and sellers.
+              </p>
 
-            <div className="mt-8 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-wrap gap-4">
 
-              <Link
-                href="/properties"
-                className="rounded-xl bg-white px-6 py-3 font-semibold text-green-700 transition hover:scale-105"
-              >
-                Browse Properties
-              </Link>
+                <Link
+                  href="/properties"
+                  className="rounded-xl bg-white px-6 py-3 font-semibold text-green-800 transition hover:scale-105"
+                >
+                  Browse Properties
+                </Link>
 
-              <Link
-                href="/add-property"
-                className="rounded-xl border border-white px-6 py-3 font-semibold transition hover:bg-white hover:text-green-700"
-              >
-                Add Property
-              </Link>
+                <Link
+                  href="/add-property"
+                  className="rounded-xl border border-white px-6 py-3 font-semibold transition hover:bg-white hover:text-green-800"
+                >
+                  Add Property
+                </Link>
+
+              </div>
 
             </div>
 
-          </div>
+            <div className="flex h-44 w-44 items-center justify-center rounded-full bg-white/20 backdrop-blur-md">
 
-          <div className="flex h-44 w-44 items-center justify-center rounded-full bg-white/20 backdrop-blur">
+              <Building2 size={90} />
 
-            <Building2 size={90} />
+            </div>
 
           </div>
 
@@ -189,7 +195,7 @@ export default function DashboardPage() {
           </Link>
 
         </div>
-                <div className="mt-10 grid gap-8 lg:grid-cols-3">
+        <div className="mt-10 grid gap-8 lg:grid-cols-3">
 
           <div className="rounded-3xl bg-white p-8 shadow-lg lg:col-span-2">
 
